@@ -27,10 +27,7 @@ pyxel.sound(1).set("f3f2f1", "n", "7", "f", 10)   # 敵を倒した音
 
 # 画面の更新処理
 def update():
-    global player_x, player_y
-    global enemy_x, enemy_y, enemy_dx
-    global score
-    global game_over
+    global player_x, player_y, enemy_x, enemy_y, enemy_dx, score, game_over
 
     # ゲームオーバーならリスタート処理のみ
     if game_over:
@@ -49,25 +46,16 @@ def update():
 
     # 矢印キーで移動
     if pyxel.btn(pyxel.KEY_LEFT):
-        player_x = player_x - 2
+        player_x = max(0, player_x - 2)
     if pyxel.btn(pyxel.KEY_RIGHT):
-        player_x = player_x + 2
+        player_x = min(152, player_x + 2)
     if pyxel.btn(pyxel.KEY_UP):
-        player_y = player_y - 2
+        player_y = max(0, player_y - 2)
     if pyxel.btn(pyxel.KEY_DOWN):
-        player_y = player_y + 2
-
-    if player_x < 0:
-        player_x = 0
-    if player_x > 152:
-        player_x = 152
-    if player_y < 0:
-        player_y = 0
-    if player_y > 112:
-        player_y = 112
+        player_y = min(112, player_y + 2)
 
     # 敵の移動
-    enemy_x = enemy_x + enemy_dx
+    enemy_x += enemy_dx
 
     # 画面端で跳ね返る
     if enemy_x < 0 or enemy_x > 152:
