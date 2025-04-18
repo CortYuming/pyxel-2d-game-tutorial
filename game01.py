@@ -20,6 +20,10 @@ enemy_bullets = []
 # ゲーム状態
 game_over = False
 
+# 音の設定
+pyxel.sound(0).set("c3e3g3c4", "t", "7", "n", 20)  # 弾の発射音
+pyxel.sound(1).set("f3f2f1", "n", "7", "f", 10)   # 敵を倒した音
+
 
 # 画面の更新処理
 def update():
@@ -28,8 +32,19 @@ def update():
     global score
     global game_over
 
-    # ゲームオーバーなら操作を受け付けない
+    # ゲームオーバーならリスタート処理のみ
     if game_over:
+        if pyxel.btnp(pyxel.KEY_R):
+            # ゲームをリセット
+            player_x = 80
+            player_y = 100
+            enemy_x = 80
+            enemy_y = 20
+            enemy_dx = 1
+            bullets.clear()
+            enemy_bullets.clear()
+            score = 0
+            game_over = False
         return
 
     # 矢印キーで移動
@@ -62,6 +77,7 @@ def update():
     if pyxel.btnp(pyxel.KEY_SPACE):
         # 弾の位置（プレイヤーの中心から発射）
         bullets.append([player_x + 4, player_y])
+        pyxel.play(0, 0)  # 音を鳴らす
 
     # 弾の移動
     for bullet in bullets:
@@ -124,6 +140,9 @@ def draw():
     if game_over:
         pyxel.text(55, 50, "GAME OVER", 8)
         pyxel.text(40, 70, "PRESS R TO RESTART", 7)
+
+    # スコア表示
+    pyxel.text(5, 5, f"SCORE:{score}", 7)
 
 
 # ゲーム開始
