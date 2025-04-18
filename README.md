@@ -85,7 +85,7 @@ player_y = 100  # プレイヤーのY座標
 
 def draw():
     pyxel.cls(0)
-    # プレイヤーを描画（四角形で表現）
+    # プレイヤーを描画
     pyxel.rect(player_x, player_y, 8, 8, 11)
 ```
 
