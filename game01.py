@@ -13,13 +13,24 @@ enemy_y = 20
 enemy_dx = 1
 # 弾のリスト
 bullets = []
+# スコア変数
+score = 0
+# 敵の弾リスト
+enemy_bullets = []
+# ゲーム状態
+game_over = False
 
 
 # 画面の更新処理
 def update():
     global player_x, player_y
     global enemy_x, enemy_y, enemy_dx
+    global score
+    global game_over
 
+    # ゲームオーバーなら操作を受け付けない
+    if game_over:
+        return
 
     # 矢印キーで移動
     if pyxel.btn(pyxel.KEY_LEFT):
@@ -57,9 +68,40 @@ def update():
         bullet[1] -= 4  # 上に移動
 
     # 画面外に出た弾を削除
+    # 弾と敵の当たり判定
     for i in range(len(bullets)-1, -1, -1):
-        if bullets[i][1] < 0:
-            bullets.pop(i)
+        bullet_x = bullets[i][0]
+        bullet_y = bullets[i][1]
+
+        # 弾と敵が重なっているか
+        if (bullet_x < enemy_x + 8 and
+                bullet_x + 2 > enemy_x and
+                bullet_y < enemy_y + 8 and
+                bullet_y + 6 > enemy_y):
+            # 敵に当たった
+            bullets.pop(i)  # 弾を消す
+            score += 10     # スコア加算
+            pyxel.play(0, 1)  # 効果音
+
+    # 一定間隔で敵が弾を発射
+    if pyxel.frame_count % 30 == 0:
+        enemy_bullets.append([enemy_x + 4, enemy_y + 8])
+
+    # 敵の弾の移動
+    for bullet in enemy_bullets:
+        bullet[1] += 2  # 下に移動
+
+    # 画面外の弾を削除
+    # プレイヤーと敵の弾の当たり判定
+    for i in range(len(enemy_bullets)-1, -1, -1):
+        bullet = enemy_bullets[i]
+        if (bullet[0] < player_x + 8 and
+                bullet[0] + 2 > player_x and
+                bullet[1] < player_y + 8 and
+                bullet[1] + 6 > player_y):
+            # プレイヤーがやられた
+            game_over = True
+            enemy_bullets.pop(i)
 
 
 # 画面の描画処理
@@ -73,6 +115,15 @@ def draw():
     # 弾の描画
     for bullet in bullets:
         pyxel.rect(bullet[0], bullet[1], 2, 6, 10)
+
+    # 敵の弾の描画
+    for bullet in enemy_bullets:
+        pyxel.rect(bullet[0], bullet[1], 2, 6, 8)
+
+    # ゲームオーバー表示
+    if game_over:
+        pyxel.text(55, 50, "GAME OVER", 8)
+        pyxel.text(40, 70, "PRESS R TO RESTART", 7)
 
 
 # ゲーム開始

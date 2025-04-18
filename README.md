@@ -324,6 +324,9 @@ def update():
     # 画面外の弾を削除
     # プレイヤーと敵の弾の当たり判定
     for i in range(len(enemy_bullets)-1, -1, -1):
+        if enemy_bullets[i][1] > 120:
+            enemy_bullets.pop(i)
+
         bullet = enemy_bullets[i]
         if (bullet[0] < player_x + 8 and
                 bullet[0] + 2 > player_x and
