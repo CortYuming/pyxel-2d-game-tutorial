@@ -264,7 +264,6 @@ def update():
             # 敵に当たった
             bullets.pop(i)  # 弾を消す
             score += 10     # スコア加算
-            pyxel.play(0, 1)  # 効果音
 ```
 
 - 当たり判定のコード解説
@@ -413,6 +412,24 @@ def update():
     if pyxel.btnp(pyxel.KEY_SPACE):
         bullets.append([player_x + 4, player_y])
         pyxel.play(0, 0)  # 音を鳴らす
+
+    # 略
+
+    # 弾と敵の当たり判定（効果音を追加する）
+    for i in range(len(bullets)-1, -1, -1):
+        bullet_x = bullets[i][0]
+        bullet_y = bullets[i][1]
+
+        # 弾と敵が重なっているか
+        if (bullet_x < enemy_x + 8 and
+                bullet_x + 2 > enemy_x and
+                bullet_y < enemy_y + 8 and
+                bullet_y + 6 > enemy_y):
+            # 敵に当たった
+            bullets.pop(i)  # 弾を消す
+            score += 10     # スコア加算
+            pyxel.play(0, 1)  # 効果音
+
 ```
 
 - 簡単な効果音の追加方法
