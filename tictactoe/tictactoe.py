@@ -106,11 +106,11 @@ class TicTacToe:
 
     def draw_game_state(self):
         if self.game_state == 1:
-            pyxel.text(10, 5, "○の勝ち! Rキーでリセット", 11)
+            pyxel.text(10, 5, "○ wins! Press R to reset", 11)
         elif self.game_state == 2:
-            pyxel.text(10, 5, "×の勝ち! Rキーでリセット", 8)
+            pyxel.text(10, 5, "× wins! Press R to reset", 8)
         elif self.game_state == 3:
-            pyxel.text(10, 5, "引き分け! Rキーでリセット", 7)
+            pyxel.text(10, 5, "Draw! Press R to reset", 7)
 
     def check_game_state(self):
         # 横のラインをチェック
