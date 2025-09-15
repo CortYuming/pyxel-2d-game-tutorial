@@ -14,6 +14,7 @@ class Fighter:
         self.hp = 100
         self.is_attacking = False
         self.attack_timer = 0
+        self.facing_right = True
 
     def update(self):
         # 攻撃タイマー更新
@@ -21,6 +22,12 @@ class Fighter:
             self.attack_timer -= 1
             if self.attack_timer == 0:
                 self.is_attacking = False
+
+        # 向きの更新
+        if self.vx > 0:
+            self.facing_right = True
+        elif self.vx < 0:
+            self.facing_right = False
 
         # 重力
         if not self.on_ground:
@@ -49,14 +56,20 @@ class Fighter:
 
     def get_attack_rect(self):
         if self.is_attacking:
-            return (self.x + self.width, self.y + 8, 20, 8)
+            if self.facing_right:
+                return (self.x + self.width, self.y + 8, 20, 8)
+            else:
+                return (self.x - 20, self.y + 8, 20, 8)
         return None
 
     def draw(self):
         pyxel.rect(self.x, self.y, self.width, self.height, self.color)
         # 攻撃エフェクト
         if self.is_attacking:
-            pyxel.rect(self.x + self.width, self.y + 8, 20, 8, 10)
+            if self.facing_right:
+                pyxel.rect(self.x + self.width, self.y + 8, 20, 8, 10)
+            else:
+                pyxel.rect(self.x - 20, self.y + 8, 20, 8, 10)
 
 
 class Game:
