@@ -1,5 +1,7 @@
 # 物理パズルゲーム作成チュートリアル（全3回）
 
+<img width="1072" height="860" alt="スクリーンショット 2025-09-21 9 02 57" src="https://github.com/user-attachments/assets/3978dc4f-a09f-4edc-87fa-e5944938970b" />
+
 ## 第1回：基本的な画面とボールを作ろう
 
 ### 学習内容
