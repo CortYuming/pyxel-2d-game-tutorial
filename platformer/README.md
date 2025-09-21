@@ -1,6 +1,6 @@
 # pyxelプラットフォーマー作成カリキュラム（全4回）
 
-<img width="1072" height="940" alt="platformerスクリーンショット" src="https://github.com/user-attachments/assets/placeholder-image" />
+<img width="1072" height="940" alt="スクリーンショット 2025-09-21 15 08 17" src="https://github.com/user-attachments/assets/32176032-a34c-4b78-802d-23e0e0e5df61" />
 
 - [pyxelプラットフォーマー作成カリキュラム（全4回）](#pyxelプラットフォーマー作成カリキュラム全4回)
   - [第1回：基本移動とジャンプ](#第1回基本移動とジャンプ)
