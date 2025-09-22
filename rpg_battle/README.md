@@ -1,8 +1,10 @@
 # ミニRPGバトル
 
-ターン制バトルシステムを持つシンプルなRPGゲームを作成します。
+<img width="1072" height="940" alt="スクリーンショット 2025-09-22 18 12 35" src="https://github.com/user-attachments/assets/5ea0ffd3-c3c6-45f4-befa-9c92ac3c0dd6" />
 
 ## 学習目標
+
+ターン制バトルシステムを持つシンプルなRPGゲームを作成します。
 
 - ターン制のゲームシステムの理解
 - HP/MPなどのパラメータ管理
